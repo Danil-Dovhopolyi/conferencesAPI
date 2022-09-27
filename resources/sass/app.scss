@@ -1,0 +1,21 @@
+// Fonts
+@import url("https://fonts.bunny.net/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+.create__conf {
+    width: 100%;
+    > div {
+        margin: 1%;
+    }
+    &__form {
+        padding: 1%;
+        width: 60%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 8px;
+    }
+}
