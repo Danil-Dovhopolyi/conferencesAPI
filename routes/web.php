@@ -20,3 +20,4 @@ Route::get('/conferences/{conference}', [ConferenceController::class, 'showConfe
 Route::get('/conferences/{conference}/edit', [ConferenceController::class, 'editConference'])->name('conferences.edit');
 Route::patch('/conferences/{conference}', [ConferenceController::class, 'updateConference'])->name('conferences.update');
 Route::post('/conferences', [ConferenceController::class, 'storeConference'])->name('conferences.store');
+Route::delete('/conferences/{conference}', [ConferenceController::class, 'destroyConference'])->name('conferences.delete');

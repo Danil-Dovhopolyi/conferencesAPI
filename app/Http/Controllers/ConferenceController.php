@@ -13,13 +13,13 @@ class ConferenceController extends Controller
 
     public function createConference()
     {
-          return view('conferences.create');
+        return view('conferences.create');
     }
     public function storeConference()
     {
         $data = request()->validate([
             'title' => 'string',
-            'dateconf' => 'string',
+            'date' => 'string',
             'latitude' => 'integer',
             'longitude' => 'integer',
             'country' => 'string'
@@ -35,16 +35,21 @@ class ConferenceController extends Controller
     {
         return view('conferences.edit', compact('conference'));
     }
-    public function update(Conference $conference)
+    public function updateConference(Conference $conference)
     {
         $data = request()->validate([
             'title' => 'string',
-            'dateconf' => 'string',
+            'date' => 'string',
             'latitude' => 'integer',
             'longitude' => 'integer',
             'country' => 'string'
         ]);
         $conference->update($data);
-        return redirect()->route('conferences.show', $conference->$id);
+        return redirect()->route('conferences.index');
+    }
+    public function destroyConference(Conference $conference)
+    {
+            $conference->delete();
+            return redirect()->route('conferences.index');
     }
 }

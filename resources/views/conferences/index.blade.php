@@ -29,23 +29,27 @@
     <div class="conferences">
         @foreach ($conferences as $conference)
             <div class="list-group conference m-2 d-flex">
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start w-80">
+                <div class="list-group-item list-group-item-action flex-column align-items-start w-80">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ $conference->title }}</h5>
                         <p>{{ $conference->date }}</p>
                     </div>
                     <div class="conference__functionality d-flex justify-content-between m-3 ">
-                        <button type="button" class="btn btn-info w-25">
+                        <a href="{{ route('conferences.update', $conference->id) }}" type="button"
+                            class="btn btn-info w-25">
                             Info
-                        </button>
-                        <button class="conference__btn btn btn-danger w-25 ">
-                            Delete
-                        </button>
-                        <button type="button" class="btn btn-warning w-25">
+                        </a>
+                        <form action="{{ route('conferences.delete', $conference->id) }}" method="post" class="w-25">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger w-100">Delete</button>
+                        </form>
+                        <a href="{{ route('conferences.edit', $conference->id) }}" type="button"
+                            class="btn btn-warning w-25">
                             Edit
-                        </button>
+                        </a>
                     </div>
-                </a>
+                </div>
             </div>
         @endforeach
 

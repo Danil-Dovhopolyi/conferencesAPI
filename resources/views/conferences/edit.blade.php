@@ -14,24 +14,27 @@
 <body>
     <div class="create__conf ">
         <form class="create__conf__form d-flex mt-5 flex-column"
-            action="{{ route('conferences.update', $conference->$id) }}" method="post">
+            action="{{ route('conferences.update', $conference->id) }}" method="post">
             @csrf
             @method('patch')
             <div class="form-group create__conf__form-title">
-                <input type="text" name="title" class="form-control" placeholder="Enter title" />
+                <input type="text" name="title" class="form-control" placeholder="Enter title"
+                    value="{{ $conference->title }}" />
             </div>
             <div class="create__conf__form-date d-flex m-0 ">
 
-                <input type="date" id="start" name="date" value="">
+                <input type="date" id="start" name="date" value="{{ $conference->date }}">
                 <div class="create__conf__coords d-flex align-items-center">
-                    <input type="number" name="latitude" class="form-control m-1" placeholder="latitude" />
-                    <input type="number" name="longitude" class="form-control" placeholder="longitude" />
+                    <input type="number" name="latitude" class="form-control m-1" placeholder="latitude"
+                        value="{{ $conference->latitude }}" />
+                    <input type="number" name="longitude" class="form-control" placeholder="longitude"
+                        value="{{ $conference->longitude }}" />
                 </div>
             </div>
             <div class="form-group create__conf__form-conutry">
                 <label for="exampleFormControlSelect">Country</label>
-                <select class="form-select" name="country[]">
-                    <option selected>Choose Country</option>
+                <select class="form-select" name="country">
+                    <option selected>{{ $conference->country }}</option>
                     <option name="Ukraine" value='Ukraine'>Ukraine</option>
                     <option name="USA" value="USA">USA</option>
                     <option name="Poland" value="Poland">Poland</option>

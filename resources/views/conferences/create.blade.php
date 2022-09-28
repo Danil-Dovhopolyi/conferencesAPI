@@ -17,14 +17,14 @@
     </div>
     <div class="create__conf ">
         <form class="create__conf__form d-flex mt-5 flex-column" action="{{ route('conferences.store') }}"
-            method="post">
+            method="POST">
             @csrf
             <div class="form-group create__conf__form-title">
                 <input type="text" name="title" class="form-control" placeholder="Enter title" />
             </div>
             <div class="create__conf__form-date d-flex m-0 ">
 
-                <input type="date" id="start" name="date" value="">
+                <input type="date" id="start" name="date" value="2022-09-28">
                 <div class="create__conf__coords d-flex align-items-center">
                     <input type="number" name="latitude" class="form-control m-1" placeholder="latitude" />
                     <input type="number" name="longitude" class="form-control" placeholder="longitude" />
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group create__conf__form-conutry">
                 <label for="exampleFormControlSelect">Country</label>
-                <select class="form-select" name="country[]">
+                <select class="form-select" name="country">
                     <option selected>Choose Country</option>
                     <option name="Ukraine" value='Ukraine'>Ukraine</option>
                     <option name="USA" value="USA">USA</option>

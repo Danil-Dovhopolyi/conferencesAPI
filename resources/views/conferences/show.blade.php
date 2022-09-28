@@ -33,7 +33,7 @@
                                 <p> Date: </p>
                             </div>
                             <div class="input">
-                                <input readOnly class="form-control" value='' />
+                                <input readOnly class="form-control" value='{{ $conference->date }}' />
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                 <p> Country: </p>
                             </div>
                             <div class="input">
-                                <input readOnly class="form-control" value='' />
+                                <input readOnly class="form-control" value='{{ $conference->country }}' />
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                 <p>Logitude: </p>
                             </div>
                             <div class="input">
-                                <input readOnly class="form-control" value='' />
+                                <input readOnly class="form-control" value='{{ $conference->longitude }}'' />
                             </div>
                         </div>
                     </div>
@@ -63,12 +63,14 @@
                                 <p> Latitude: </p>
                             </div>
                             <div class="input">
-                                <input readOnly class="form-control" value='' />
+                                <input readOnly class="form-control" value='{{ $conference->latitude }}' />
                             </div>
                         </div>
-                        <button class="meet__btn btn btn-danger w-25 ">
-                            Delete
-                        </button>
+                        <form action="{{ route('conferences.delete', $conference->id) }}" method="Post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>
