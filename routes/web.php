@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +23,11 @@ Route::get('/conferences/{conference}/edit', [ConferenceController::class, 'edit
 Route::patch('/conferences/{conference}', [ConferenceController::class, 'updateConference'])->name('conferences.update');
 Route::post('/conferences', [ConferenceController::class, 'storeConference'])->name('conferences.store');
 Route::delete('/conferences/{conference}', [ConferenceController::class, 'destroyConference'])->name('conferences.delete');
+
+Auth::routes();
+
+Route::get('/', [HomeController::class, 'index'])->name('auth.login');
+Route::post('/login_process', [LoginController::class, 'login'])->name('login_process');
+Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
+
+
