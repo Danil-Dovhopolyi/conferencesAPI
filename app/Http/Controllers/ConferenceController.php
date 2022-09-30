@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 use App\Models\Conference;
+use App\Models\User;
 
 class ConferenceController extends Controller
 {
-    public function getConferences()
+    public function getConferences(User $user)
     {
+        // dd($user->id);
         $conferences = Conference::all();
         return view('conferences.index', compact('conferences'));
     }
+
+    
 
     public function createConference()
     {

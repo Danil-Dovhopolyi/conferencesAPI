@@ -78,7 +78,9 @@
             </nav>
         </div>
     </header>
-    <h1>List</h1>
+    <h1>Your Conferences</h1>
+
+    <h1>All Conferences</h1>
     <div class="conferences">
         @foreach ($conferences as $conference)
             <div class="list-group conference m-2 d-flex">
