@@ -7,14 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conference extends Model
 {
+
     use HasFactory;
     protected $table = 'conferences';
     protected $guarded = [];
     public $timestamps = false;
-
-    public function user()
-    {
-        return $this -> belongsToMany(\App\Models\User::class);
-    }
-
 }

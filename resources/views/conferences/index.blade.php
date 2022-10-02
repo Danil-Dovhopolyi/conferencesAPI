@@ -79,7 +79,31 @@
         </div>
     </header>
     <h1>Your Conferences</h1>
-
+    @foreach ($myConferences as $myConference)
+        <div class="list-group conference m-2 d-flex">
+            <div class="list-group-item list-group-item-action flex-column align-items-start w-80">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ $myConference->title }}</h5>
+                    <p>{{ $myConference->date }}</p>
+                </div>
+                <div class="conference__functionality d-flex justify-content-between m-3 ">
+                    <a href="{{ route('conferences.show', $myConference->id) }}" type="button"
+                        class="btn btn-info w-25">
+                        Info
+                    </a>
+                    <form action="{{ route('conferences.delete', $myConference->id) }}" method="post" class="w-25">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger w-100">Delete</button>
+                    </form>
+                    <a href="{{ route('conferences.edit', $myConference->id) }}" type="button"
+                        class="btn btn-warning w-25">
+                        Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endforeach
     <h1>All Conferences</h1>
     <div class="conferences">
         @foreach ($conferences as $conference)
@@ -90,7 +114,7 @@
                         <p>{{ $conference->date }}</p>
                     </div>
                     <div class="conference__functionality d-flex justify-content-between m-3 ">
-                        <a href="{{ route('conferences.update', $conference->id) }}" type="button"
+                        <a href="{{ route('conferences.show', $conference->id) }}" type="button"
                             class="btn btn-info w-25">
                             Info
                         </a>

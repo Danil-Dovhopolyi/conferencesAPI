@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Role;
+use App\Models\UserRole;
+use App\Models\Conference;
 
 class User extends Authenticatable
 {
@@ -25,7 +27,6 @@ class User extends Authenticatable
         'password' ,
         'phone' ,
         'birthdate' ,
-        'type'  ,
         'country' 
     ];
 
@@ -50,10 +51,10 @@ class User extends Authenticatable
     
     public function conf()
     {
-        return $this -> belongsToMany(\App\Models\Conference::class);
+        return $this -> belongsToMany(Conference::class);
     }
      public function role()
     {
-        return $this -> belongsToMany(\App\Models\Role::class);
+        return $this -> belongsToMany(UserRole::class);
     }
 }

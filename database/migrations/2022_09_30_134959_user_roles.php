@@ -13,9 +13,11 @@ return new class extends Migration
      */
      public function up()
     {
-        Schema::create('role_user', function (Blueprint $table) {
+        Schema::create('user_roles', function (Blueprint $table) {
             $table -> integer('user_id');
             $table -> integer('role_id');
+            $table -> datetime('created_at');
+            $table -> datetime('updated_at');
          });
     }
 

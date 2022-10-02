@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->double('longitude');
             $table->double('latitude');
+            $table->integer('creator_id');
         });
     }
 
