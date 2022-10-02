@@ -122,8 +122,8 @@
                                 <label for="type" class="col-md-4 col-form-label text-md-end">Type</label>
                                 <div class="col-md-6">
                                     <select class="form-select " name="type">
-                                        <option name="Listener" value='Listener'>Listener</option>
-                                        <option name="Confree" value="Confree">Confree</option>
+                                        <option name="Listener" value='3'>Listener</option>
+                                        <option name="Confree" value="2">Confree</option>
                                     </select>
                                 </div>
                             </div>
