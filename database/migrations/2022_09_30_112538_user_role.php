@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-         {
-        Schema::create('user_conf', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('conf_id');
-        });
-    }
+        Schema::create('user_role', function (Blueprint $table) {
+            $table -> integer('user_id');
+            $table -> integer('role_id');
+         });
     }
 
     /**
