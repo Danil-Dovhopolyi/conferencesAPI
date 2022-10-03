@@ -1,0 +1,31 @@
+deploy-develop:
+  image: naymkazp/gitlab-runner-envoy-node:latest
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - current_dir=$(pwd)
+    - remove_dir=$(date +'%m%d%Y%H%M%S')
+    - scp -r "$current_dir" "$SSH_USER_NAME"@192.168.10.240:"$SERVER_DIR"/releases/"$remove_dir"
+    - envoy run deploy --remove_dir="$remove_dir" --server_dir="$SERVER_DIR"
+  only:
+    refs:
+      - branches
+    variables:
+      - $CI_COMMIT_REF_NAME == $AUTO_DEPLOY_BRANCH
+
+deploy:
+  image: naymkazp/gitlab-runner-envoy-node:latest
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - current_dir=$(pwd)
+    - remove_dir=$(date +'%m%d%Y%H%M%S')
+    - scp -r "$current_dir" "$SSH_USER_NAME"@192.168.10.240:"$SERVER_DIR"/releases/"$remove_dir"
+    - envoy run deploy --remove_dir="$remove_dir" --server_dir="$SERVER_DIR"
+  except:
+    - develop
+  when: manual
