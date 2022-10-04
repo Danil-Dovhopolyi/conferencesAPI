@@ -24,7 +24,7 @@
 
 @task('run_composer')
     echo "composer install"
-    cd {{ $releases_dir }} /src
+    cd {{ $releases_dir }}
     composer install --prefer-dist --no-scripts -q -o
 @endtask
 
