@@ -55,7 +55,7 @@
 @task('frontend_build')
     echo 'Frontend Build'
     cd {{ $releases_dir }}
-    npm install && npm run dev
+    npm install && npm run build
 @endtask
 
 @task('remove_old_releases')
