@@ -52,11 +52,7 @@
     echo "Cache cleared"
 @endtask
 
-@task('frontend_build')
-    echo 'Frontend Build'
-    cd {{ $releases_dir }}
-    npm install && npm run build
-@endtask
+
 
 @task('remove_old_releases')
     echo 'Remove OLD release'
