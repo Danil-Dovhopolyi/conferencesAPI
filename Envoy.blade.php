@@ -11,7 +11,6 @@
     run_composer
     update_symlinks
     artisan_command
-    frontend_build
     remove_old_releases
 @endstory
 
