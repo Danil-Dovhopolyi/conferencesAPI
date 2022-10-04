@@ -1,7 +1,7 @@
 @servers(['web' => 'dovhopolyi-do@192.168.10.240'])
 
 @setup
-    $releases_dir = $server_dir . '/releases/' . $remove_dir . '/src';
+    $releases_dir = $server_dir . '/releases/' . $remove_dir;
     $releases_git_dir = $server_dir . '/releases/' . $remove_dir . '/.git';
     $app_dir = $server_dir . '/app';
 @endsetup
