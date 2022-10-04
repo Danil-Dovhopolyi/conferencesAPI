@@ -42,12 +42,12 @@
 
 @task('artisan_command')
     echo 'Artisan Command'
-    php {{ $releases_dir }}/artisan view:clear --quiet
-    php {{ $releases_dir }}/artisan cache:clear --quiet
-    php {{ $releases_dir }}/artisan config:cache --quiet
-    php {{ $releases_dir }}/artisan migrate --force
-    php {{ $releases_dir }}/artisan storage:link
-    php {{ $releases_dir }}/artisan queue:restart --quiet
+    php81 {{ $releases_dir }}/artisan view:clear --quiet
+    php81 {{ $releases_dir }}/artisan cache:clear --quiet
+    php81 {{ $releases_dir }}/artisan config:cache --quiet
+    php81 {{ $releases_dir }}/artisan migrate --force
+    php81 {{ $releases_dir }}/artisan storage:link
+    php81 {{ $releases_dir }}/artisan queue:restart --quiet
     echo "Cache cleared"
 @endtask
 
