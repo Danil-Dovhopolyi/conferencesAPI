@@ -55,9 +55,9 @@ class ConferenceController extends Controller
      * @param  \App\Models\Conference  $conference
      * @return \Illuminate\Http\Response
      */
-    public function show(Conference $conference)
+    public function show($id)
     {
-        //
+        return Conference::find($id);
     }
 
     /**
@@ -78,9 +78,10 @@ class ConferenceController extends Controller
      * @param  \App\Models\Conference  $conference
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreConferenceRequest $request, Conference $conference)
+    public function update(StoreConferenceRequest $request, $id)
     {
-      $conference = Conference::update($request->all());
+      $conference = Conference::find($id);
+      $conference->update($request->all());
         return response()->json([
             'status'=>true,
             'message'=>'Conference updated succesfully',
@@ -94,8 +95,12 @@ class ConferenceController extends Controller
      * @param  \App\Models\Conference  $conference
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Conference $conference)
+    public function destroy($id)
     {
-        //
+        $conference = Conference::destroy($id);
+        return response()->json([
+            'status'=>true,
+            'message'=>'Conference deleted succesfully',
+        ], 200);
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id()->from(0);
             $table->string('title');
             $table->string('country');
-            $table->date('date');
+            $table->datetime('date');
             $table->double('longitude');
             $table->double('latitude');
         });

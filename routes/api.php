@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\ConferenceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Public routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/conferences', [ConferenceController::class, 'index']);
+
+//Protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/conferences/{id}', [ConferenceController::class, 'show']);
+    Route::post('/conferences', [ConferenceController::class, 'store']);
+    Route::post('/conferences/{id}', [ConferenceController::class, 'show']);
+    Route::put('/conferences/{id}', [ConferenceController::class, 'update']);
+    Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
-Route::apiResource('conferences', ConferenceController::class);
