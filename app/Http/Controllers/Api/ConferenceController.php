@@ -99,8 +99,7 @@ class ConferenceController extends Controller
     {
         $conference = Conference::destroy($id);
         return response()->json([
-            'status'=>true,
             'message'=>'Conference deleted succesfully',
-        ], 200);
+        ]);
     }
 }

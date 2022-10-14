@@ -13,9 +13,6 @@ class AuthController extends Controller
         $fields = $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'required|string',
-            'phone' => 'required|string',
-            'type' => 'required|integer',
-            'birthdate' => 'required|date',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
             'country' => 'required|string',
@@ -24,9 +21,6 @@ class AuthController extends Controller
         $user = User::create([
             'firstname' => $fields['firstname'],
             'lastname' => $fields['lastname'],
-            'type' => $fields['type'],
-            'phone' => $fields['phone'],
-            'birthdate' => $fields['birthdate'],
             'password' => bcrypt($fields['password']),
             'country' => $fields['country'],
             'email' => $fields['email'],

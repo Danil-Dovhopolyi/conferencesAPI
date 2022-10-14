@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-        $table->id()->autoIncrement();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('country');
-        });
+         Schema::create('user_roles', function (Blueprint $table) {
+            $table -> integer('user_id');
+            $table -> integer('role_id');
+            $table -> datetime('created_at');
+            $table -> datetime('updated_at');
+         });
     }
 
     /**
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 };
