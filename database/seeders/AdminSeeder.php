@@ -1,11 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-
+use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\UserRole;
 
 class AdminSeeder extends Seeder
 {
@@ -16,9 +15,10 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-            $admin = User::create(
+            $user = User::create(
             ['firstname' => 'Admin', 'lastname' => 'Admin', 'password' => '$2y$10$k.cJb1S.pA9nxsRSpIKvu.IewRzQ.C24QTRWpTB7g5io5xYkDeVma', 'country'=> 'Ukraine', 'email' => 'admin@groupbwt.com'] // password - 12345678
         );
-           UserRole::create(['user_id' => $admin->id, 'role_id' => 1]);
+       $user->assignRole('admin');
+
     }
 }

@@ -18,13 +18,17 @@ use Illuminate\Support\Facades\Auth;
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/conferences', [ConferenceController::class, 'index']);
+Route::post('/login', [AuthController::class, 'login']);
+
 Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
-Route::post('/conferences', [ConferenceController::class, 'store']);
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
     Route::put('/conferences/{id}', [ConferenceController::class, 'update']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
+    Route::post('/conferences', [ConferenceController::class, 'store']);
+});
+Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
+    return response()->json(['user' => $request->user()]);
 });

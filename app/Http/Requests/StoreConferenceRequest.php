@@ -26,7 +26,6 @@ class StoreConferenceRequest extends FormRequest
         return [
             'title'=> "required|max:255",
             'country'=> "required",
-            'date'=> "required",
             'longitude'=> "required",
             'latitude'=> "required",
         ];

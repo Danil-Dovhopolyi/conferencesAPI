@@ -20,7 +20,6 @@ return [
         'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
         Sanctum::currentApplicationUrlWithPort()
     ))),
-
     /*
     |--------------------------------------------------------------------------
     | Sanctum Guards
@@ -32,7 +31,6 @@ return [
     | token that's present on an incoming request for authentication.
     |
     */
-
     'guard' => ['web'],
 
     /*
@@ -62,6 +60,8 @@ return [
     'middleware' => [
         'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
+        
     ],
+    'prefix' => 'api' 
 
 ];

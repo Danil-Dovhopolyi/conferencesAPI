@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class RoleSeeder extends Seeder
 {
@@ -15,14 +17,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(
-            ['name' => 'Admin', 'role_id' => 1]
-        );
-        Role::create(
-            ['name' => 'Confree', 'role_id' => 2]
-        );
-         Role::create(
-            ['name' => 'Listener', 'role_id' => 3]
-        );
+      Role::create(['guard_name' => 'api', 'name' => 'admin']);
+      Role::create(['guard_name' => 'api', 'name' => 'conferee']);
+      Role::create(['guard_name' => 'api', 'name' => 'listener']);
     }
 }
