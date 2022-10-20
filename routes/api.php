@@ -19,14 +19,10 @@ use Illuminate\Support\Facades\Auth;
 
 // Public routes
 Route::post('/logout', [AuthController::class, 'logout']);
-Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/conferences', [ConferenceController::class, 'index']);
-Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
-Route::put('/conferences/{id}', [ConferenceController::class, 'update']);
-Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
-Route::post('/conferences', [ConferenceController::class, 'store']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/reports', [ReportController::class, 'index']);
 Route::get('/reports/{id}', [ReportController::class, 'show']);
@@ -34,8 +30,18 @@ Route::put('/reports/{id}', [ReportController::class, 'update']);
 Route::delete('/reports/{id}', [ReportController::class, 'destroy']);
 Route::post('/reports', [ReportController::class, 'store']);
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+     Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
+     Route::put('/conferences/{id}', [ConferenceController::class, 'update']);
+     Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
+     Route::post('/conferences', [ConferenceController::class, 'store']);
+});
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+     Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
+     Route::put('/conferences/{id}', [ConferenceController::class, 'update']);
+     Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
+     Route::post('/conferences', [ConferenceController::class, 'store']);
 });
 Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
      return Auth::user();
