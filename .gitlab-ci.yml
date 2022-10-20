@@ -7,7 +7,7 @@ deploy-develop:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - current_dir=$(pwd)
     - remove_dir=$(date +'%m%d%Y%H%M%S')
-    - scp -r "$current_dir" "$SSH_USER_NAME"@192.168.10.240:"$SERVER_DIR"/releases/"$remove_dir"
+    - scp -r "$current_dir" "$SSH_USER_NAME"@isp.groupbwt.com:"$SERVER_DIR"/releases/"$remove_dir"
     - node -v
     - envoy run deploy --remove_dir="$remove_dir" --server_dir="$SERVER_DIR"
   only:
@@ -25,7 +25,7 @@ deploy:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - current_dir=$(pwd)
     - remove_dir=$(date +'%m%d%Y%H%M%S')
-    - scp -r "$current_dir" "$SSH_USER_NAME"@192.168.10.240:"$SERVER_DIR"/releases/"$remove_dir"
+    - scp -r "$current_dir" "$SSH_USER_NAME"@isp.groupbwt.com:"$SERVER_DIR"/releases/"$remove_dir"
     - envoy run deploy --remove_dir="$remove_dir" --server_dir="$SERVER_DIR"
   except:
     - develop
