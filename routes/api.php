@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Auth;
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/conferences', [ConferenceController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/conferences', [ConferenceController::class, 'index']);
 Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
 Route::put('/conferences/{id}', [ConferenceController::class, 'update']);
 Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
