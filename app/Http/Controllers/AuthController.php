@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -29,39 +30,46 @@ class AuthController extends Controller
             'role' => $fields['role'],
         ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
+        $user->assignRole($fields['role']);
         $response = [
             'user' => $user,
-            'token' => $token
+            'token' => $token,
+            'roles' => $user->roles,
+            'permissions'=>User::with('roles.permissions')->get()->find($user)
         ];
-        $user->assignRole($fields['role']);
         return response($response, 201);
     }
     public function logout(Request $request){
         auth()->user()->tokens()->delete();
-
+        
         return [
             'message' => 'Logged out'
         ];
     }
- function login(Request $request)
+    function login(Request $request)
     {
         $user= User::where('email', $request->email)->first();
         // print_r($data);
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response([
-                    'message' => ['These credentials do not match our records.']
-                ], 404);
-            }
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => ['These credentials do not match our records.']
+            ], 404);
+        }
         
-             $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('myapptoken')->plainTextToken;
         
-            $response = [
-                'user' => $user,
-                'token' => $token
-            ];
+        $response = [
+            'user' => $user,
+            'token' => $token,
+            'roles' => $user->roles,
+            'permissions'=>User::with('roles.permissions')->get()->find($user)
+      
+            
+        ];
         
              return response($response, 201);
     }
+   
 }
 
 

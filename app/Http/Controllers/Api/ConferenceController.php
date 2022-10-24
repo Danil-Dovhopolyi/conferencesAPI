@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreConferenceRequest;
 use App\Models\Conference;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConferenceController extends Controller
 {
@@ -41,14 +42,18 @@ class ConferenceController extends Controller
      */
     public function store(StoreConferenceRequest $request)
     {
-        $conference = Conference::create($request->all());
+        $conference = $this->createConferenceByUser($request->all());
+        
         return response()->json([
             'status'=>true,
             'message'=>'Conference created succesfully',
             'conference'=>$conference
         ], 200);
     }
-
+   private function createConferenceByUser($conference) {
+        $conference['creator_id'] = Auth::user()->id;
+        Conference::create($conference);
+    }
     /**
      * Display the specified resource.
      *

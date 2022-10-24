@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('country');
             $table->double('longitude');
             $table->double('latitude');
+            $table->integer('creator_id');
         });
     }
 

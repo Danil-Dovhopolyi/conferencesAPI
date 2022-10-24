@@ -45,5 +45,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-  
+   public function conf()
+    {
+        return $this -> belongsToMany(Conference::class);
+    }
 }
