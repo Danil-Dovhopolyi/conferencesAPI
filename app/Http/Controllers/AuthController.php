@@ -39,6 +39,7 @@ class AuthController extends Controller
         ];
         return response($response, 201);
     }
+    
     public function logout(Request $request){
         auth()->user()->tokens()->delete();
         
@@ -46,6 +47,25 @@ class AuthController extends Controller
             'message' => 'Logged out'
         ];
     }
+    
+    public function updateProfile(Request $request, $id)
+    {
+    
+        $user = User::find($id);
+    
+        $user->firstname = $request['firstname'];
+        $user->lastname = $request['lastname'];
+        $user->email = $request['email'];
+        $user->country = $request['country'];
+        $user->password = bcrypt($request['password']);
+        $user->save();
+        return response()->json([
+            'status'=>true,
+            'message'=>'User updated succesfully',
+            'user'=>$user,
+        ], 200);
+    }
+
     function login(Request $request)
     {
         $user= User::where('email', $request->email)->first();

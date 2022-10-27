@@ -11,5 +11,5 @@ class Report extends Model
     protected $table = 'reports';
     protected $fillable = ['topic', 'dateStart', 'dateEnd', 'description'];
     protected $guarded = [];
-      public $timestamps = false;
+    public $timestamps = false;
 }
