@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('dateStart');
             $table->timestamp('dateEnd');
             $table->string('description');
+            $table->integer('creator_id');
         });
     }
 

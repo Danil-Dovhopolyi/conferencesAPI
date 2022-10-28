@@ -49,4 +49,8 @@ class User extends Authenticatable
     {
         return $this -> belongsToMany(Conference::class);
     }
+      public function report()
+    {
+        return $this -> belongsToMany(Report::class);
+    }
 }
