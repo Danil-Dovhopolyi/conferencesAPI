@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReportRequest;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -30,14 +31,19 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreReportRequest $request)
+     public function store(StoreReportRequest $request)
     {
-        $report = Report::create($request->all());
+        $report = $this->createReportByUser($request->all());
+        
         return response()->json([
             'status'=>true,
-            'message'=>'Conference created succesfully',
+            'message'=>'Report created succesfully',
             'report'=>$report
         ], 200);
+    }
+   private function createReportByUser($report) {
+        $report['creator_id'] = Auth::user()->id;
+        Report::create($report);
     }
 
     /**

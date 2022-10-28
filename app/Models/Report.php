@@ -9,7 +9,7 @@ class Report extends Model
 {
     use HasFactory;
     protected $table = 'reports';
-    protected $fillable = ['topic', 'dateStart', 'dateEnd', 'description'];
+    protected $fillable = ['topic', 'dateStart', 'dateEnd', 'description' , 'creator_id'];
     protected $guarded = [];
       public $timestamps = false;
 }
