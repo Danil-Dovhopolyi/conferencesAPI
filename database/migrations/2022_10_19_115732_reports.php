@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('dateEnd');
             $table->string('description');
             $table->integer('creator_id');
+            $table->boolean('isLiked')->default(false);
         });
     }
 
