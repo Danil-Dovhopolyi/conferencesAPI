@@ -17,11 +17,10 @@ class ConferenceController extends Controller
      */
     public function index()
     {
-        $conference = Conference::all();
+        $conferenceList = Conference::paginate(10);
         return response()->json([
-            'status'=>true,
-            'conferences'=>$conference
-        ]);
+            $conferenceList
+        ], 200);
     }
 
     /**
@@ -50,10 +49,12 @@ class ConferenceController extends Controller
             'conference'=>$conference
         ], 200);
     }
-   private function createConferenceByUser($conference) {
+    
+    private function createConferenceByUser($conference) {
         $conference['creator_id'] = Auth::user()->id;
         Conference::create($conference);
     }
+
     /**
      * Display the specified resource.
      *
@@ -107,4 +108,6 @@ class ConferenceController extends Controller
             'message'=>'Conference deleted succesfully',
         ]);
     }
+  
+    
 }

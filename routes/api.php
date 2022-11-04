@@ -2,6 +2,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\ConferenceController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\FavouriteController;
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +24,10 @@ use Illuminate\Support\Facades\Auth;
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::get('/conferences', [ConferenceController::class, 'index']);
+Route::get('/conferences/search/{title?}', [SearchController::class, 'searchConference']);
+Route::get('/reports/search/{topic?}', [SearchController::class, 'searchReport']);
+Route::get('/conferences/range', [SearchController::class, 'range']);
+     Route::get('/conferences', [ConferenceController::class, 'index']);
 Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
 
 Route::get('/reports', [ReportController::class, 'index']);
@@ -40,11 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy']);
      Route::post('/conferences', [ConferenceController::class, 'store']);
 });
-Route::group(['middleware' => ['auth:sanctum']], function () {
-     Route::put('/conferences/{id}', [FavouriteController::class, 'update']);
-     Route::delete('/conferences/{id}', [FavouriteController::class, 'destroy']);
-     Route::post('/conferences', [FavouriteController::class, 'store']);
-});
+
 
 Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
      $user = Auth::user(); 

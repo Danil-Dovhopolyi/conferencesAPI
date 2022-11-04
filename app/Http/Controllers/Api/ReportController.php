@@ -17,11 +17,10 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $report = Report::all();
+        $reportList = Report::paginate(10);
         return response()->json([
-            'status'=>true,
-            'reports'=>$report
-        ]);
+            $reportList
+        ], 200);
     }
 
 
@@ -88,5 +87,20 @@ class ReportController extends Controller
         return response()->json([
             'message'=>'Conference deleted succesfully',
         ]);
+    }
+    public function search($topic = null)
+    {
+        if($topic == null){
+            return Report::paginate(10);
+        }
+        $result = Report::where("topic", "like", "%" . $topic . "%")->paginate(10);
+        if(count($result))
+        {
+            return $result;
+        }
+        else
+        {
+            return ['Result'=>'No records found'];
+        }
     }
 }
